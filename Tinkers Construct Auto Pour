@@ -9,6 +9,7 @@
 --Plan to add Rednet output--
 --Plan to add function that counts the amount of blocks smelted and stores that info--
 --Plan to add function that will bring up a "stats" page to display info about the smelter--
+--Plan to Add Error Handling--
 Version = 0.8
 term.clear()
 term.setCursorPos(1,1)
