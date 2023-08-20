@@ -1,0 +1,60 @@
+--Version 0.8--
+--CHANGELOG--   
+--Added Time left too the poor loop--
+--Changed the program to ask what you are smelting before asking how many blocks--
+--Added Title announceing program--
+--Time now rounds up so as to not be confusing--
+--FUTURE PLANS--
+--Plan to add functions to clean up code--
+--Plan to add Rednet output--
+--Plan to add function that counts the amount of blocks smelted and stores that info--
+--Plan to add function that will bring up a "stats" page to display info about the smelter--
+Version = 0.8
+term.clear()
+term.setCursorPos(1,1)
+print("Welcome to the Auto Pour!")
+print("Created by Kyle Hendry (V01D)!")
+sleep(3)
+term.clear()
+term.setCursorPos(1,1)
+--setTextColor(colors.red)
+print("Auto Pour Version " .. Version)
+--setTextColor(colors.white)
+print("What side is the spout on?")
+print("Options: front, back, left, right, top, bottom")
+side=read()
+term.clear()
+term.setCursorPos(1,1) 
+    while true do
+        print("NO CAPITALS")
+        print("What are you smelting?")
+        input = { gold = 15, iron = 18, bronze = 25, aluminum = 20, copper = 30, lead = 23, stone = 10, cobalt = 45, tin = 16, brass = 25, glass = 18, clay = 15, zinc = 15}
+        time = input[io.read()]
+        term.clear()
+        term.setCursorPos(1,1)
+        print("How many block's are you smelting? Make sure its a number.")
+        blocks=tonumber(read())
+        doneIn = (time * blocks) / 60
+        print("It will take: " .. math.ceil(doneIn) .. " Minutes to complete")
+        sleep(2)
+        print("Starting..")
+        sleep(2)
+    	blocksLeft = blocks 
+ 
+        for i=1, blocks do
+            term.setBackgroundColor(colors.black)
+            term.clear()
+            term.setCursorPos(1,1)
+            redstone.setOutput(side, true)
+            sleep(1)
+            redstone.setOutput(side, false)
+            print("Pouring block " .. i)
+            timeLeft = (time * blocksLeft) / 60
+            print("Time left: " .. math.ceil(timeLeft).. " Minutes")
+            sleep(time-1)
+            term.setBackgroundColor(colours.black)
+            term.clear()
+            term.setCursorPos(1,1)
+            blocksLeft = blocksLeft - 1
+         end
+    end
